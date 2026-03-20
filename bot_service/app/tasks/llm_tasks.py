@@ -1,7 +1,6 @@
 # bot_service/app/tasks/llm_tasks.py
-print("DEBUG: llm_tasks.py был импортирован!")
-
 import asyncio
+import logging
 from app.infra.celery_app import celery_app
 from app.services.openrouter_client import call_openrouter
 from aiogram import Bot
@@ -10,17 +9,11 @@ from app.core.config import settings
 # Инициализируем бота для отправки ответа
 bot = Bot(token=settings.TELEGRAM_BOT_TOKEN)
 
-# @celery_app.task(bind=True)
-# def llm_request(self, chat_id: int, prompt: str):
+# Настройка логирования вместо print
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
-#     print(f"Worker received task for chat {chat_id} with prompt: {prompt}")
-
-#     # Запускаем асинхронную функцию в синхронном воркере
-#     result = asyncio.run(call_openrouter(prompt))
-    
-#     # Отправляем результат пользователю
-#     asyncio.run(bot.send_message(chat_id=chat_id, text=result))
-#     return result
+logger.info("llm_tasks.py был импортирован!")
 
 # Функция, которая содержит всю асинхронную логику
 async def async_llm_logic(chat_id, prompt):

@@ -2,7 +2,6 @@ import pytest
 from unittest.mock import AsyncMock, MagicMock
 from app.bot.handlers import handle_token, handle_message
 from app.infra.redis import redis_client
-from app.tasks.llm_tasks import llm_request
 
 @pytest.mark.asyncio
 async def test_handle_token_saves_to_redis(mocker):

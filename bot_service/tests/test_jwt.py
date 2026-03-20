@@ -1,6 +1,5 @@
 import pytest
 from app.core.jwt import decode_and_validate
-from app.core.config import settings
 
 # Тест будет использовать фикстуру из conftest.py
 def test_jwt_validation_success(create_test_token):
