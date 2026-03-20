@@ -25,6 +25,14 @@ async def handle_token(message: types.Message):
     except Exception as e:
         await message.answer(f"Ошибка валидации токена: {e}")
 
+@router.message(Command("logout"))
+async def cmd_logout(message: types.Message):
+    user_id = message.from_user.id
+    # Удаляем токен из Redis
+    await redis_client.delete(f"token:{user_id}")
+    await message.answer("Вы вышли из системы. Чтобы авторизоваться снова, используйте /token <jwt>")
+
+
 @router.message()
 async def handle_message(message: types.Message):
     # 1. Получаем токен из Redis
@@ -43,3 +51,4 @@ async def handle_message(message: types.Message):
     # 3. Отправляем задачу в Celery (RabbitMQ)
     llm_request.delay(chat_id=message.chat.id, prompt=message.text)
     await message.answer("Запрос принят в работу, ожидайте ответа...")
+
