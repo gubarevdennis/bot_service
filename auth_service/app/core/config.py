@@ -8,9 +8,7 @@ class Settings(BaseSettings):
     JWT_SECRET: str
     JWT_ALG: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
-    
     SQLITE_PATH: str = "./auth.db"
-
     model_config = SettingsConfigDict(env_file=".env")
 
 settings = Settings()
