@@ -13,7 +13,7 @@ async def register_user(
     data: RegisterRequest, 
     uc: AuthUseCase = Depends(get_auth_uc)
 ):
-    # Usecase сам выбросит исключение (например, 409), если пользователь есть
+    # Usecase сам выбросит исключение, если пользователь есть
     user = await uc.register(data)
     return UserPublic.model_validate(user)
 

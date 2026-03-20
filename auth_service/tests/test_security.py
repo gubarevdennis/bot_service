@@ -27,12 +27,12 @@ def test_jwt_token_creation_and_decoding():
     assert payload is not None
     assert payload["sub"] == str(user_id)
     assert payload["role"] == role
-    # Проверяем, что время жизни установлено (iat и exp будут близки)
+    # Проверяем, что время жизни установлено
     assert "exp" in payload
     assert "iat" in payload
 
 def test_expired_token_decoding():
-    # Создаем токен, который истёк (например, 5 минут назад)
+    # Создаем токен, который истёк 
     expired_token = create_access_token(
         subject=1, 
         role="user", 

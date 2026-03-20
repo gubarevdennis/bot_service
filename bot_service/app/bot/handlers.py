@@ -48,7 +48,7 @@ async def handle_message(message: types.Message):
         await message.answer("Ваш токен истек или невалиден. Пожалуйста, получите новый.")
         return
     
-    # 3. Отправляем задачу в Celery (RabbitMQ)
+    # 3. Отправляем задачу в Celery - RabbitMQ
     llm_request.delay(chat_id=message.chat.id, prompt=message.text)
     await message.answer("Запрос принят в работу, ожидайте ответа...")
 
